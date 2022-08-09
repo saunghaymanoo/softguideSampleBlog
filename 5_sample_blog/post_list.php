@@ -52,7 +52,7 @@
                             <tr>
                                 <td><?php echo $key + 1; ?></td>
                                 <td class="nowrap"><?php echo short($c['title']); ?></td>
-                                <td class="nowrap"><?php echo short($c['description'], 50); ?></td>
+                                <td class="nowrap"><?php echo short(strip_tags(html_entity_decode($c['description'])),60); ?></td>
                                 <td><?php echo $c['ctitle']; ?></td>
                                 <?php
                                 if ($_SESSION['user']['role'] != 2) {

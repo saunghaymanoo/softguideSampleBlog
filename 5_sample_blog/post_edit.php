@@ -82,7 +82,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Post Description</label>
-                        <textarea type="text" name="description" class="form-control" rows="15" required><?php echo $current['description']; ?></textarea>
+                        <textarea type="text" name="description" class="form-control" rows="15" required><?php echo strip_tags(html_entity_decode($current['description'])); ?></textarea>
                     </div>
                     <hr>
                     <button name="updateBtn" class="btn btn-primary">Update Post</button>
