@@ -68,7 +68,7 @@
 
 
 
-                    <li class="menu-title">
+                    <!-- <li class="menu-title">
                         <span>Your Profile</span>
                     </li>
                     <li class="menu-item">
@@ -87,23 +87,46 @@
                             </span>
                         </a>
                     </li>
-                    <li class="menu-spacer"></li>
+                    <li class="menu-spacer"></li> -->
 
-                   <li class="menu-title">
-                    <span>Setting</span>
-                   </li>
-                    <li class="menu-item">
-                        <a href="<?php echo $url; ?>/category_add.php" class="menu-item-link">
-                            <span>
-                                <i class="feather-layers"></i>
-                                Category Manager
-                            </span>
-                            <span class="badge badge-pill bg-white shadow-sm text-primary p-1">
-                                <?php echo countTotal('categories'); ?>
-                            </span>
-                        </a>
+                    <?php
+                        if($_SESSION['user']['role'] <=1){
+                    ?>
+
+                    <li class="menu-title">
+                        <span>Setting</span>
                     </li>
-                   
+                        <li class="menu-item">
+                            <a href="<?php echo $url; ?>/category_add.php" class="menu-item-link">
+                                <span>
+                                    <i class="feather-layers"></i>
+                                    Category Manager
+                                </span>
+                                <span class="badge badge-pill bg-white shadow-sm text-primary p-1">
+                                    <?php echo countTotal('categories'); ?>
+                                </span>
+                            </a>
+                        </li>
+                        <?php
+                            if($_SESSION['user']['role'] ==0){
+                        ?>
+                            <li class="menu-item">
+                                <a href="<?php echo $url; ?>/user_list.php" class="menu-item-link">
+                                    <span>
+                                        <i class="feather-users"></i>
+                                        User Manager
+                                    </span>
+                                    <span class="badge badge-pill bg-white shadow-sm text-primary p-1">
+                                        <?php echo countTotal('users'); ?>
+                                    </span>
+                                </a>
+                            </li>
+                        <?php
+                        }
+                        ?>
+                    <?php
+                     }
+                    ?>
                     <li class="menu-item">
                         <a href="<?php echo $url; ?>/logout.php" class="menu-item-link">
                             <span>

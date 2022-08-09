@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?php echo $url; ?>/assets/vendor/feather-icons-web/feather.css">
     <link rel="stylesheet" href="<?php echo $url; ?>/assets/vendor/data_table/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo $url; ?>/assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 </head>
 </head>
 <body>
@@ -30,9 +31,9 @@
                         <button class="show-sidebar-btn btn btn-primary d-block d-lg-none">
                             <i class="feather-menu text-light" style="font-size: 2em;"></i>
                         </button>
-                        <form action="" method="post" class="d-none d-md-block">
+                        <form action="<?= $url; ?>/search.php" method="post" class="d-none d-md-block">
                             <div class="form-inline">
-                                <input type="text" class="form-control mr-2" placeholder="Search Everything">
+                                <input type="text" name="searchKey" class="form-control mr-2" placeholder="Search Everything">
                                 <button class="btn btn-light">
                                     <i class="feather-search text-primary"></i>
                                 </button>

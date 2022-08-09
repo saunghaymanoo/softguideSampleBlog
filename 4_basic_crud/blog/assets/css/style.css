@@ -134,7 +134,10 @@
 }
 
 
-
+.img{
+    width: 20px!important;
+    height: 20px!important;
+}
 
 @media screen and (max-width: 780px){
     .sidebar{

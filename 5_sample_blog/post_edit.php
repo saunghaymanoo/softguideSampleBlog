@@ -25,18 +25,18 @@
                 </div>
                 <hr>
                 <?php
-                  $id = $_GET['id'];
-                  $current = post($id);
+                $id = $_GET['id'];
+                $current = post($id);
 
-                  if (isset($_POST['updateBtn'])) {
-                     
-                      if(postUpdate()){
-                          linkto('post_list.php');
-                      }
-                  }
+                if (isset($_POST['updateBtn'])) {
+
+                    if (postUpdate()) {
+                        linkto('post_list.php');
+                    }
+                }
 
                 ?>
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="">Post Title</label>
                         <input value="<?php echo $current['title'] ?>" type="text" name="title" class="form-control" required />
@@ -46,21 +46,47 @@
                         <label for="">Select Category</label>
                         <select name="category_id" id="" class="custom-select">
                             <?php
-                                foreach (categories() as $c){
+                            foreach (categories() as $c) {
                             ?>
-                                <option value="<?php echo $c['id'] ?>" <?php echo $c['id']==$current['category_id']?"selected":"" ?>><?php echo $c['title'] ?></option>
+                                <option value="<?php echo $c['id'] ?>" <?php echo $c['id'] == $current['category_id'] ? "selected" : "" ?>><?php echo $c['title'] ?></option>
                             <?php
-                                }
+                            }
                             ?>
                         </select>
                     </div>
                     <div class="form-group">
+
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                            </li>
+                           
+                        </ul>
+                        <hr>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <input type="hidden" value="<?= $current['image'] ?>" name="oldImage">
+                                <img src="<?= $current['image'] ?>" alt="" style="width:50px;height:50px;">
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <input type="file" name="upload" class="form-control" />
+                            </div>
+                          
+                        </div>
+                        <!-- <label for="">Image</label>
+                        <img src="<?= $current['image'] ?>" alt="" style="width:50px;height:50px;">
+                        <input type="file" name="upload" class="form-control" /> -->
+                    </div>
+                    <div class="form-group">
                         <label for="">Post Description</label>
-                        <textarea type="text" name="description" class="form-control" rows="15" required><?php echo $current['description']; ?></textarea>
+                        <textarea type="text" name="description" class="form-control" rows="15" required><?php echo strip_tags(html_entity_decode($current['description'])); ?></textarea>
                     </div>
                     <hr>
                     <button name="updateBtn" class="btn btn-primary">Update Post</button>
-                    
+
                 </form>
 
             </div>
@@ -69,3 +95,6 @@
 </div>
 
 <?php include "template/footer.php"; ?>
+<script>
+    $('.example-class').tab();
+</script>
