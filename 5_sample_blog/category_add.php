@@ -1,4 +1,5 @@
 <?php require_once "core/auth.php"; ?>
+<?php require_once "core/isAdminOrEditor.php"; ?>
 <?php include "template/header.php"; ?>
 <div class="row">
     <div class="col-12">

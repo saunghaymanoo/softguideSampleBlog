@@ -30,9 +30,9 @@
                         <button class="show-sidebar-btn btn btn-primary d-block d-lg-none">
                             <i class="feather-menu text-light" style="font-size: 2em;"></i>
                         </button>
-                        <form action="" method="post" class="d-none d-md-block">
+                        <form action="<?= $url; ?>/search.php" method="post" class="d-none d-md-block">
                             <div class="form-inline">
-                                <input type="text" class="form-control mr-2" placeholder="Search Everything">
+                                <input type="text" name="searchKey" class="form-control mr-2" placeholder="Search Everything">
                                 <button class="btn btn-light">
                                     <i class="feather-search text-primary"></i>
                                 </button>

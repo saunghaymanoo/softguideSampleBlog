@@ -5,7 +5,8 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-white mb-4">
                 <li class="breadcrumb-item"><a href="<?php echo $url; ?>/dashboard.php">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Post</li>
+                <li class="breadcrumb-item"><a href="<?php echo $url; ?>/post_list.php">Post List</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Search</li>
             </ol>
         </nav>
     </div>
@@ -18,12 +19,18 @@
                     <h4 class="mb-0">
                         <i class="feather-list text-primary"></i> Post List
                     </h4>
-                    <a href="<?php echo $url; ?>/post_add.php" class="btn btn-outline-primary">
-                        <i class="feather-plus-circle"></i>
+                    <a href="<?php echo $url; ?>/post_list.php" class="btn btn-outline-primary">
+                        <i class="feather-list"></i>
                     </a>
                 </div>
                 <hr>
-
+                <?php
+                    $result = postSearch($_POST['searchKey']);
+                    if(count($result) == 0){
+                       
+                        echo alert("There is no data .","warning");
+                    }else{
+                ?>
                 <table class="table table-hover table-bordered mt-3">
                     <thead>
                         <tr>
@@ -45,7 +52,7 @@
                     </thead>
                     <tbody>
                         <?php
-                        foreach (posts() as $key => $c) {
+                        foreach (postSearch($_POST['searchKey']) as $key => $c) {
                             $userName = user($c['user_id']);
                             $time = showTime($c['created_at'], 'd-M-Y h:i');
                         ?>
@@ -53,7 +60,7 @@
                                 <td><?php echo $key + 1; ?></td>
                                 <td class="nowrap"><?php echo short($c['title']); ?></td>
                                 <td class="nowrap"><?php echo short($c['description'], 50); ?></td>
-                                <td><?php echo $c['ctitle']; ?></td>
+                                <td><?php echo category($c['category_id'])['title']; ?></td>
                                 <?php
                                 if ($_SESSION['user']['role'] != 2) {
                                 ?>
@@ -93,15 +100,12 @@
                         <?php } ?>
                     </tbody>
                 </table>
-
+                    <?php
+                    }
+                    ?>
             </div>
         </div>
     </div>
 </div>
 
 <?php include "template/footer.php"; ?>
-<script>
-    $(".table").dataTable({
-        // "order" : [[0,"desc"]]
-    });
-</script>

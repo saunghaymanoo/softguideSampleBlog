@@ -26,12 +26,12 @@
                 <hr>
                 <?php
                 if (isset($_POST['addBtn'])) {
-                    postAdd();
+                    $file = postAdd();
+                    print_r($file);
                 }
 
-
                 ?>
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="">Post Title</label>
                         <input type="text" name="title" class="form-control" required />
@@ -47,6 +47,10 @@
                                 }
                             ?>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Image</label>
+                        <input type="file" name="upload" class="form-control" required />
                     </div>
                     <div class="form-group">
                         <label for="">Post Description</label>
