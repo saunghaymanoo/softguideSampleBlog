@@ -249,4 +249,43 @@ function postSearch($searchKey){
        return fetchAll($sql);
    }
    //dashboard end
+   //payment start
+   function payNow(){
+    $from = $_SESSION['user']['id'];
+    $to = $_POST['to_user'];
+    $description = $_POST['description'];
+    $amount = $_POST['amount'];
+
+
+    $fromUser = user($from);
+    if($fromUser['money'] >= $amount){
+        $leftAmount = $fromUser['money']-$amount;
+        $sql = "UPDATE users SET money=$leftAmount WHERE id=$from";
+        mysqli_query(con(),$sql);
+
+        $toUser = user($to);
+        $newAmount = $toUser['money']+$amount;
+        $sql = "UPDATE users SET money=$newAmount WHERE id=$to";
+        mysqli_query(con(),$sql);
+
+        $sql = "INSERT INTO transition (from_user,to_user,amount,description) VALUES ($from,$to,$amount,'$description')";
+        runQuery($sql);
+    }
+   }
+   function transition($id){
+    $sql = "SELECT * FROM transition WHERE id=$id";
+    return fetch($sql);
+
+   }
+   function transitions(){
+    $userId = $_SESSION['user']['id'];
+    if($_SESSION['user']['role'] == 0){
+        $sql = "SELECT * FROM transition";
+    }else{
+        $sql = "SELECT * FROM transition WHERE to_user=$userId OR from_user=$userId";
+    }
+    return fetchAll($sql);
+   }
+   //payment end
+
 

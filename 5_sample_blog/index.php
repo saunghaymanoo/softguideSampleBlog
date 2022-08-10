@@ -1,3 +1,4 @@
+<?php require "core/auth.php"; ?>
 <?php include "template/header.php"; ?>
 
 
