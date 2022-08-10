@@ -22,6 +22,15 @@
                             </span>
                         </a>
                     </li>
+                    <li class="menu-spacer"></li>
+                    <li class="menu-item">
+                        <a href="<?php echo $url; ?>/wallet.php" class="menu-item-link">
+                            <span>
+                                <i class="feather-dollar-sign"></i>
+                                Wallet
+                            </span>
+                        </a>
+                    </li>
                     <!-- <li class="menu-item">
                         <a href="<?php echo $url; ?>/item_add.php" class="menu-item-link">
                             <span>
