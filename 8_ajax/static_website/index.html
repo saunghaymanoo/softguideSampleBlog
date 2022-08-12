@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body class="bg-dark">
+   <div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="p-2 my-3 bg-white rounded">
+                <a href="home.html" class="btn btn-outline-primary">Home</a>
+                <a href="about.html" class="btn btn-outline-primary">About</a>
+                <a href="service.html" class="btn btn-outline-primary">Services</a>
+                <a href="contact.html" class="btn btn-outline-primary">Contact</a>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <p class="page">
+                        This is home
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+   </div>
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        let page = $('.page');
+        let current = location.href;
+        function showPage(url){
+            $('a').removeClass('active');
+            $(`a[href='${url}']`).addClass('active');
+
+            //page title
+            document.title = url.replace(".html","");
+
+            //url change
+            history.pushState(null,null,current+url.replace(".html",""));
+            
+            $.get(url,function(data){
+                page.html(data);
+            })
+        }
+        $("a").click(function(e){
+            e.preventDefault();
+            let url = $(this).attr('href');
+           
+            showPage(url);
+        })
+    </script>
+</body>
+</html>

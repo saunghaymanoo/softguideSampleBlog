@@ -72,6 +72,24 @@
                             </span>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="<?php echo $url; ?>/post_like_list.php" class="menu-item-link">
+                            <span>
+                                <i class="feather-thumbs-up"></i>
+                                Like Posts
+                            </span>
+                            <!-- <span class="badge badge-pill bg-white shadow-sm text-primary p-1">
+                                <?php
+                                if(countTotal('post_likes')!=0){
+                                    echo countTotal('post_likes',"user_id={$_SESSION['user']['id']} AND status='1'");
+                                }else{
+                                    echo 0;
+                                }
+                                  
+                                 ?>
+                            </span> -->
+                        </a>
+                    </li>
 
                     <li class="menu-spacer"></li>
 
