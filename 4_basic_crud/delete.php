@@ -7,6 +7,6 @@
         header("location:read.php");
 
     }else{
-        echo "Delete Fail:",mysqli_error();
+        echo "Delete Fail:",mysqli_error($conn);
     }
 ?>

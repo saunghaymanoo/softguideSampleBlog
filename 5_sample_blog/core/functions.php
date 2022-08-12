@@ -46,6 +46,12 @@ function countTotal($table,$condition=1)
     $total = fetch($sql);
     return $total['COUNTTOTAL'];
 }
+function groupCount($table,$countId){
+    $sql = "SELECT COUNT($countId) AS COUNTTOTAL FROM $table GROUP BY $countId";
+    
+    $total = fetch($sql);
+    return $total['COUNTTOTAL'];
+}
 function short($str, $strlength = 50)
 {
     return substr($str, 0, $strlength) . "....";
@@ -149,6 +155,13 @@ function categoryUpdate()
 
     return runQuery($sql);
 }
+function isCategory($id){
+    if(category($id)){
+        return $id;
+    }else{
+        die("Category is invalid!");
+    }
+}
 //category end
 
 //post start
@@ -157,7 +170,7 @@ function postAdd()
     global $url;
     $title = textFilter($_POST['title']);
     $description = textFilter($_POST['description']);
-    $category_id = $_POST['category_id'];
+    $category_id = isCategory($_POST['category_id']);
     $user_id = $_SESSION['user']['id'];
 
     $fileName = $_FILES['upload']['name'];
@@ -184,6 +197,15 @@ function posts()
     } else {
         $sql = "SELECT posts.*,categories.title AS ctitle,categories.user_id,categories.ordering,categories.created_at FROM posts INNER JOIN categories ON posts.category_id = categories.id";
     }
+    return fetchAll($sql);
+}
+function postList()
+{
+    $sql = "SELECT * from posts";
+    return fetchAll($sql);
+}
+function postLikeList(){
+    $sql = "SELECT * FROM post_likes";
     return fetchAll($sql);
 }
 function postDelete($id)
@@ -237,6 +259,16 @@ function postSearch($searchKey){
 }
    //post end
 
+   //comment start
+   function comments($condition=1){
+    $sql = "SELECT * FROM comments WHERE $condition";
+    return fetchAll($sql);
+   }
+   function comment($id){
+    $sql = "SELECT * FROM comments WHERE post_id=$id";
+    return fetch($sql);
+   }
+   //comment end
    //dashboard start
    function dashboardPosts($limit=9999999)
    {
