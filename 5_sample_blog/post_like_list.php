@@ -94,7 +94,7 @@
                                         } else {
                                         ?>
                                             <button id="likeBtn<?php echo $c['id']; ?>" class="likeBtn btn btn-info btn-sm" post-id="<?php echo $c['id']; ?>">
-                                                <i id="like-emoji<?php echo $c['id']; ?>" class="like-emoji feather-thumbs-down fa-fw"></i>
+                                                <i id="like-emoji<?php echo $c['id']; ?>" class="like-emoji feather-thumbs-up fa-fw"></i>
                                             </button>
 
                                         <?php
@@ -254,26 +254,25 @@
         let id = $(this).attr('post-id');
         console.log(id)
 
-        if ($("#like-emoji" + id).hasClass('feather-thumbs-up')) {
+        if ($("#likeBtn" + id).hasClass('btn-outline-info')) {
             // console.log($("#like-emoji" + id));
             $.get('post_like.php?id=' + id, function(res) {
                 if ($.trim(res)) {
-                    $("#like-emoji" + id).removeClass('feather-thumbs-up');
-                    $("#like-emoji" + id).addClass('feather-thumbs-down');
-                    $("#likeBtn" + id).toggleClass('btn-primary');
+                    $("#likeBtn" + id).removeClass('btn-outline-info');
+                    $("#likeBtn" + id).addClass('btn-info');
                     $("#post-count" + id).html(res);
                 } else {
-                    $("#like-emoji" + id).removeClass('feather-thumbs-down');
-                    $("#like-emoji" + id).addClass('feather-thumbs-up');
+                    $("#like-emoji" + id).removeClass('btn-info');
+                    $("#like-emoji" + id).addClass('btn-outline-info');
                 }
             })
         } else {
 
             $.get('post_like_update.php?id=' + id, function(data) {
-                if ($.trim(data)) {
-                    $("#likeBtn" + id).toggleClass('btn-primary');
-                    $("#like-emoji" + id).removeClass('feather-thumbs-down');
-                    $("#like-emoji" + id).addClass('feather-thumbs-up');
+                console.log(data);
+                if ($.trim(data)) {                    
+                    $("#likeBtn" + id).removeClass('btn-info');
+                    $("#likeBtn" + id).addClass('btn-outline-info');
                     $("#post-count" + id).html(data);
                 }
             })
