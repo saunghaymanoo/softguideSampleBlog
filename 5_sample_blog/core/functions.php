@@ -319,5 +319,9 @@ function postSearch($searchKey){
     return fetchAll($sql);
    }
    //payment end
-
+//api start
+   function apiOutput($arr){
+    echo json_encode($arr);
+   }
+//api end
 
