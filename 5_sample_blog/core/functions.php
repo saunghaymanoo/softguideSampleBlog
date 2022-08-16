@@ -320,8 +320,8 @@ function postSearch($searchKey){
    }
    //payment end
 //api start
-   function apiOutput($sql){
-    echo json_encode(posts($sql));
+   function apiOutput($arr){
+    echo json_encode($arr);
    }
 //api end
 
