@@ -300,21 +300,21 @@ function postSearch($searchKey){
         $sql = "UPDATE users SET money=$newAmount WHERE id=$to";
         mysqli_query(con(),$sql);
 
-        $sql = "INSERT INTO transition (from_user,to_user,amount,description) VALUES ($from,$to,$amount,'$description')";
+        $sql = "INSERT INTO transitions (from_user,to_user,amount,description) VALUES ($from,$to,$amount,'$description')";
         runQuery($sql);
     }
    }
    function transition($id){
-    $sql = "SELECT * FROM transition WHERE id=$id";
+    $sql = "SELECT * FROM transitions WHERE id=$id";
     return fetch($sql);
 
    }
    function transitions(){
     $userId = $_SESSION['user']['id'];
     if($_SESSION['user']['role'] == 0){
-        $sql = "SELECT * FROM transition";
+        $sql = "SELECT * FROM transitions";
     }else{
-        $sql = "SELECT * FROM transition WHERE to_user=$userId OR from_user=$userId";
+        $sql = "SELECT * FROM transitions WHERE to_user=$userId OR from_user=$userId";
     }
     return fetchAll($sql);
    }
