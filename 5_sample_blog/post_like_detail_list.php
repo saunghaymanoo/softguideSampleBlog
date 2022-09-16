@@ -6,6 +6,23 @@ $sql = "SELECT posts.*,COUNT(posts.id) AS LikesCount FROM posts INNER JOIN post_
 $row = fetch($sql);
 ?>
 <div class="my-3">
+    <div class="d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">
+            <i class="feather-info text-primary"></i> Post Detail
+        </h4>
+        <a href="<?php echo $url; ?>/item_list.php" class="btn btn-outline-primary">
+            <i class="feather-list"></i>
+        </a>
+    </div>
+    <div class="">
+        <i class="feather-user text-primary"></i>
+        <span class="text-black-50"><?php echo user($id)['name'] ?></span>
+        <i class="feather-layers text-primary"></i>
+        <span class="text-black-50"><?php echo category($id)['title'] ?></span>
+        <i class="feather-calendar text-primary"></i>
+        <span class="text-black-50"><?php echo date('j F Y',strtotime($row['created_at'])) ?></span>
+    </div>
+    <hr>
     <div class="">
         <h4>Post Title</h4>
         <p><?php echo $row['title'] ?></p>

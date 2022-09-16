@@ -134,7 +134,10 @@
 }
 
 
-
+.categorySidebar{
+    position: sticky!important;
+    top: 15px;
+}
 
 @media screen and (max-width: 780px){
     .sidebar{

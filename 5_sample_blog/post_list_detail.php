@@ -1,18 +1,25 @@
 <?php require_once "core/auth.php"; ?>
 <?php include "template/header.php"; ?>
+<?php
+    $id = $_GET['id'];
+?>
 <div class="row">
     <div class="col-12">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-white mb-4">
                 <li class="breadcrumb-item"><a href="<?php echo $url; ?>/dashboard.php">Home</a></li>
                 <li class="breadcrumb-item"><a href="<?php echo $url; ?>/post_list.php">Post List</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Add Post</li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <?php
+                    echo post($id)['title'];
+                    ?>
+                </li>
             </ol>
         </nav>
     </div>
 </div>
 <div class="row">
-    <div class="col-12 col-xl-8">
+    <div class="col-12 col-xl-6">
         <div class="card mb-4">
             <div class="card-body">
                 <!-- <div class="d-flex justify-content-between align-items-center">
@@ -90,7 +97,8 @@
         $.get("comment_delete.php?id="+currentId,function(data){
             
             if ($.trim(data) == 'success') {
-                location.href='post_like_list.php';
+                showDetailList();
+                // location.href='post_like_list.php';
             }
         })
     })

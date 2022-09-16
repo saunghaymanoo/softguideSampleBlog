@@ -325,3 +325,14 @@ function postSearch($searchKey){
    }
 //api end
 
+//frontpanel start
+   function fPosts(){
+       $sql = "SELECT * FROM posts";
+       return fetchAll($sql);
+   }
+   function fCategories(){
+        $sql = "SELECT * FROM categories";
+       return fetchAll($sql);
+   }
+//frontpanel end
+
